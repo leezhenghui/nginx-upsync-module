@@ -521,9 +521,9 @@ ngx_http_upsync_server(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
     conf_server->name = u.url;
     conf_server->addrs = u.addrs;
     conf_server->naddrs = u.naddrs;
-    conf_server->weight = 1;
-    conf_server->max_fails = 1;
-    conf_server->fail_timeout = 10;
+    conf_server->weight = NGX_UPSTREAM_DEFAULT_WEIGHT;
+    conf_server->max_fails = NGX_UPSTREAM_DEFAULT_MAX_FAILS;
+    conf_server->fail_timeout = NGX_UPSTREAM_DEFAULT_FAIL_TIMEOUT;
 
     return NGX_CONF_OK;
 
@@ -1255,7 +1255,7 @@ ngx_http_upsync_consul_parse_json(void *data)
 {
     u_char                         *p;
     ngx_buf_t                      *buf;
-    ngx_int_t                       max_fails=2, backup=0, down=0;
+    ngx_int_t                       max_fails=NGX_UPSTREAM_DEFAULT_MAX_FAILS, backup=0, down=0;
     ngx_str_t                       src, dst;
     ngx_http_upsync_ctx_t          *ctx;
     ngx_http_upsync_conf_t         *upstream_conf = NULL;
@@ -1324,9 +1324,9 @@ ngx_http_upsync_consul_parse_json(void *data)
         temp1 = NULL;
 
         /* default value, server attribute */
-        upstream_conf->weight = 1;
-        upstream_conf->max_fails = 2;
-        upstream_conf->fail_timeout = 10;
+        upstream_conf->weight = NGX_UPSTREAM_DEFAULT_WEIGHT;
+        upstream_conf->max_fails = NGX_UPSTREAM_DEFAULT_MAX_FAILS;
+        upstream_conf->fail_timeout = NGX_UPSTREAM_DEFAULT_FAIL_TIMEOUT;
 
         upstream_conf->down = 0;
         upstream_conf->backup = 0;
@@ -1452,7 +1452,7 @@ ngx_http_upsync_consul_parse_json(void *data)
             upstream_conf->backup = (ngx_uint_t)backup;
         }
 
-        max_fails=2, backup=0, down=0;
+        max_fails=NGX_UPSTREAM_DEFAULT_MAX_FAILS, backup=0, down=0;
     }
     cJSON_Delete(root);
 
@@ -1532,9 +1532,9 @@ ngx_http_upsync_consul_services_parse_json(void *data)
         ngx_memcpy(upstream_conf->sockaddr + addr_len + 1, port_buf, port_len);
 
         /* default value, server attribute */
-        upstream_conf->weight = 1;
-        upstream_conf->max_fails = 2;
-        upstream_conf->fail_timeout = 10;
+        upstream_conf->weight = NGX_UPSTREAM_DEFAULT_WEIGHT;
+        upstream_conf->max_fails = NGX_UPSTREAM_DEFAULT_MAX_FAILS;
+        upstream_conf->fail_timeout = NGX_UPSTREAM_DEFAULT_FAIL_TIMEOUT;
 
         upstream_conf->down = 0;
         upstream_conf->backup = 0;
@@ -1675,9 +1675,9 @@ ngx_http_upsync_consul_health_parse_json(void *data)
         ngx_memcpy(upstream_conf->sockaddr + addr_len + 1, port_buf, port_len);
 
         /* default value, server attribute */
-        upstream_conf->weight = 1;
-        upstream_conf->max_fails = 2;
-        upstream_conf->fail_timeout = 10;
+        upstream_conf->weight = NGX_UPSTREAM_DEFAULT_WEIGHT;
+        upstream_conf->max_fails = NGX_UPSTREAM_DEFAULT_MAX_FAILS;
+        upstream_conf->fail_timeout = NGX_UPSTREAM_DEFAULT_FAIL_TIMEOUT;
 
         upstream_conf->down = 0;
         upstream_conf->backup = 0;
@@ -1769,7 +1769,7 @@ ngx_http_upsync_etcd_parse_json(void *data)
 {
     u_char                         *p;
     ngx_buf_t                      *buf;
-    ngx_int_t                       max_fails=2, backup=0, down=0;
+    ngx_int_t                       max_fails=NGX_UPSTREAM_DEFAULT_MAX_FAILS, backup=0, down=0;
     ngx_http_upsync_ctx_t          *ctx;
     ngx_http_upsync_conf_t         *upstream_conf = NULL;
     ngx_http_upsync_server_t       *upsync_server = data;
@@ -1852,9 +1852,9 @@ ngx_http_upsync_etcd_parse_json(void *data)
         temp0 = NULL;
 
         /* default value, server attribute */
-        upstream_conf->weight = 1;
-        upstream_conf->max_fails = 2;
-        upstream_conf->fail_timeout = 10;
+        upstream_conf->weight = NGX_UPSTREAM_DEFAULT_WEIGHT;
+        upstream_conf->max_fails = NGX_UPSTREAM_DEFAULT_MAX_FAILS;
+        upstream_conf->fail_timeout = NGX_UPSTREAM_DEFAULT_FAIL_TIMEOUT;
 
         upstream_conf->down = 0;
         upstream_conf->backup = 0;
@@ -1978,7 +1978,7 @@ ngx_http_upsync_etcd_parse_json(void *data)
             upstream_conf->backup = (ngx_uint_t)backup;
         }
 
-        max_fails=2, backup=0, down=0;
+        max_fails=NGX_UPSTREAM_DEFAULT_MAX_FAILS, backup=0, down=0;
     }
     cJSON_Delete(root);
 

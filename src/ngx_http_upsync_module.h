@@ -46,6 +46,10 @@
 #define NGX_HTTP_LB_HASH_MODULA    8
 #define NGX_HTTP_LB_HASH_KETAMA    16
 
+#define NGX_UPSTREAM_DEFAULT_FAIL_TIMEOUT 10
+#define NGX_UPSTREAM_DEFAULT_WEIGHT 1
+#define NGX_UPSTREAM_DEFAULT_MAX_FAILS 1
+
 #if (NGX_HTTP_UPSTREAM_CHECK) 
 
 extern ngx_uint_t ngx_http_upstream_check_add_dynamic_peer(ngx_pool_t *pool,
